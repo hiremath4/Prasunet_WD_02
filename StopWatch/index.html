@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StopWatch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<header id="head"><h1>STOP WATCH TIMER</h1></header>
+    <div class="stopwatch">
+        <h1 id="disTime">00:00:00<hr></h1>
+        <div class="buttons">
+            <img src="images/stop.png" onclick="stop()">
+            <img src="images/start.png" onclick="start()">
+            <img src="images/reset.png" onclick="pause()">
+        </div>
+    </div>
+    <script>
+        let [sec,min,hrs]=[0,0,0];
+        let disTime=document.querySelector('#disTime'); 
+        timer=null;
+        function stopwatch()
+        {
+            sec++;
+            if(sec==60)
+            {
+                sec=0;
+                min++;
+                if(min==60)
+                {
+                    min=0;
+                    hrs++;
+                }
+            }
+            let s=sec<10? "0"+sec:sec;
+            let m=min<10? "0"+min:min;
+            let h=hrs<10? "0"+hrs:hrs;
+
+            disTime.innerHTML=h+":"+m+":"+s+"<hr>";  
+        }
+        function start()
+            {
+                if(timer!==null)
+                {
+                    clearInterval(timer); 
+                }
+                timer=setInterval(stopwatch,1000);            
+            }
+            function stop()
+            {
+                clearInterval(timer);
+            }
+            function pause()
+            {
+                clearInterval(timer);
+                [sec,min,hrs]=[0,0,0];
+                disTime.innerHTML="00:00:00<hr>";
+            }
+        
+    </script>
+</body>
+</html>
